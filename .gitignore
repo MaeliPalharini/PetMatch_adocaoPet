@@ -1,0 +1,24 @@
+# Build output
+/target/
+/build/
+
+# IDEs
+/.idea/
+/.vscode/
+/*.iml
+
+# Maven wrapper
+/.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Credenciais e variáveis de ambiente
+.env

@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/petmatch
+    username: petmatch_dev
+    password: lBmNN375T-a-
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: false
+
+  app:
+    frontend:
+      url: http://localhost:3000
+
+
+application:
+  security:
+    jwt:
+      secret-key: a9Fz1XqP7LdM2vE8RbWuK3NcHtYgJ6Qo
+
+app:
+  cookie:
+    domain: "localhost"
+    secure: false
+

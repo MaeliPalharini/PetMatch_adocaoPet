@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: postgres-petmatch
+    restart: unless-stopped
+    env_file:
+      - .env               # contém PG_USER, PG_PASSWORD, PG_DATABASE
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - petmatch-data:/var/lib/postgresql/data
+    networks:
+      - petmatch-net
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
+    restart: unless-stopped
+    env_file:
+      - .env               # PGADMIN_DEFAULT_EMAIL, PGADMIN_DEFAULT_PASSWORD
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "15432:80"
+    networks:
+      - petmatch-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: your-dockerhub-username/petmatch-backend:latest
+    container_name: petmatch-backend
+    restart: unless-stopped
+    env_file:
+      - .env               # todas as variáveis de ambiente
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      PG_HOST: db
+      PG_PORT: 5432
+      PG_DATABASE: ${PG_DATABASE}
+      PG_USER: ${PG_USER}
+      PG_PASSWORD: ${PG_PASSWORD}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      APP_COOKIE_DOMAIN: localhost
+      APP_COOKIE_MAX_AGE: 900
+      APP_COOKIE_SECURE: false
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${PG_DATABASE}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - petmatch-net
+
+networks:
+  petmatch-net:
+    driver: bridge
+
+volumes:
+  petmatch-data:

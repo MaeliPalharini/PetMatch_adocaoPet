@@ -1,0 +1,24 @@
+spring:
+  profiles: railway
+
+  datasource:
+    url: jdbc:postgresql://${PG_HOST}:${PG_PORT}/${PG_DATABASE}
+    username: ${PG_USER}
+    password: ${PG_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
+app:
+  cookie:
+    domain: ${APP_COOKIE_DOMAIN}
+    secure: ${APP_COOKIE_SECURE:true}
