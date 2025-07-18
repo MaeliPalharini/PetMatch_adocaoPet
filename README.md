@@ -46,15 +46,6 @@ Criar uma plataforma onde pessoas possam:
 
 ---
 
-## 👩‍💻 Equipe
-
-| Nome            | Função           | GitHub               |
-|-----------------|------------------|----------------------|
-| Maeli Palharini | Backend Developer | [@MaeliPalharini](https://github.com/seu-usuario) |
-| Steph Gurgel    | Frontend Developer | [@Steph7478](https://github.com/Steph7478) |
-
----
-
 ## 🚧 Status do Projeto
 
 - ✅ Backend configurado com Spring Boot + DynamoDB
