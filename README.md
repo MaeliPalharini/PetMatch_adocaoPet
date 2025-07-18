@@ -34,7 +34,7 @@ Criar uma plataforma onde pessoas possam:
     backend/
         ├── src/
         │ ├── main/
-        │ │ └── java/com/patamansa/backend/
+        │ │ └── java/com/petmach/backend/
         │ │ ├── model/
         │ │ ├── controller/
         │ │ ├── service/
