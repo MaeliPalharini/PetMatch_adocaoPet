@@ -1,4 +1,4 @@
-# 🐾 PataMansa – Site de Adoção de Pets
+# 🐾 PetMch – Site de Adoção de Pets
 
 Bem-vindo(a) ao repositório do **PataMansa**, um projeto pessoal de duas amigas, dedicado a facilitar a adoção responsável de animais de estimação. A ideia é construir uma aplicação completa com backend em Java (Spring Boot + DynamoDB) e frontend moderno e responsivo.
 
