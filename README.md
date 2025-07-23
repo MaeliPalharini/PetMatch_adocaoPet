@@ -21,7 +21,7 @@ Criar uma plataforma onde pessoas possam:
 - Java 17
 - Spring Boot 3
 - Spring Security
-- AWS DynamoDB (com SDK e Enhanced Client)
+- PostgreSQL
 - Maven
 
 ### Frontend (em desenvolvimento)
@@ -48,7 +48,7 @@ Criar uma plataforma onde pessoas possam:
 
 ## 🚧 Status do Projeto
 
-- ✅ Backend configurado com Spring Boot + DynamoDB
+- ✅ Backend configurado com Spring Boot + PostgreSQL
 - ✅ Entidade `Pet` modelada
 - ✅ CRUD em andamento
 - 🚧 Frontend em desenvolvimento
