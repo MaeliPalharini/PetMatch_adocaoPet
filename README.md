@@ -12,7 +12,6 @@ React + Vite + Tailwind, e um backend robusto em Java com Spring Boot e PostgreS
 Mais do que um sistema de cadastro, o PetMatch quer ser um elo de conexão entre humanos 
 e bichinhos em busca de um novo lar ❤️
 ---
-
 ## 🎯 Objetivo
 
 Criar uma plataforma onde pessoas possam:
