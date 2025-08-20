@@ -11,20 +11,21 @@ spring:
     baseline-on-migrate: true
     baseline-version: 1
 
-  app:
-    frontend:
-      url: http://localhost:3000
-
-
   security:
     oauth2:
       client:
         registration:
           google:
-            redirect-uri: "{baseUrl}/login/oauth2/code/google"
-            scope:
-              - email
-              - profile
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/oauth2/redirect"
+            scope: openid, profile, email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
 
 server:
   port: 8080
@@ -33,13 +34,11 @@ server:
     include-binding-errors: always
     forward-headers-strategy: framework
 
+app:
+  frontend:
+    url: ${APP_FRONTEND_URL:http://localhost:3000}
+
 application:
   security:
     jwt:
-      secret-key: ${JWT_SECRET_KEY}
-
-app:
-  cookie:
-    domain: ${APP_COOKIE_DOMAIN}
-    max-age: ${APP_COOKIE_MAX_AGE:900}   # default 15min = 900s
-    secure: ${APP_COOKIE_SECURE:false}
+      secret-key: ${JWT_SECRET_KEY:lNjYbLAq4CVPcrRpJEq3QZID6cXifMeoiIpsh8szUfrvgHVBFab3r1aX1PfdBP5p}

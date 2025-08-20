@@ -1,10 +1,7 @@
 package com.petmatch.backend.security;
-
-import com.petmatch.backend.model.RefreshToken;
 import com.petmatch.backend.model.Role;
 import com.petmatch.backend.model.User;
 import com.petmatch.backend.repository.UserRepository;
-import com.petmatch.backend.security.RefreshTokenService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,11 +19,9 @@ import java.io.IOException;
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     private final JwtService jwtService;
-    private final RefreshTokenService refreshTokenService;
-    private final CookieUtil cookieUtil;
     private final UserRepository userRepository;
 
-    @Value("${app.frontend.url}")
+    @Value("${app.frontend.url:http://localhost:3000}")
     private String frontendUrl;
 
     @Override
@@ -35,34 +30,23 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication)
             throws IOException, ServletException {
 
-        // Extrai o e-mail do usuário autenticado via OAuth2
         OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
         String userEmail = oauth2User.getAttribute("email");
-
 
         User user = userRepository.findByEmail(userEmail)
                 .orElseGet(() -> {
                     User novo = User.builder()
                             .name(oauth2User.getAttribute("name"))
                             .email(userEmail)
-
-                            .password("OAUTH2_USER")
+                            .password("")
                             .role(Role.ADOTANTE)
                             .build();
                     return userRepository.save(novo);
                 });
 
-        // Gera Access Token (JWT)
-        String accessToken = jwtService.gerarToken(userEmail);
-        cookieUtil.addAuthCookie(response, accessToken);
+        String jwt = jwtService.gerarToken(userEmail);
 
-        // Gera e persiste Refresh Token
-        RefreshToken rt = refreshTokenService.create(user);
-        cookieUtil.addRefreshCookie(response, rt.getToken());
-
-        // Finalmente redireciona para o front-end
-        response.sendRedirect(frontendUrl);
+        String redirect = "%s/oauth2/success?token=%s".formatted(frontendUrl, jwt);
+        response.sendRedirect(redirect);
     }
 }
-
-

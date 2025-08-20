@@ -38,13 +38,11 @@ public class JwtFilter extends OncePerRequestFilter {
         if ("OPTIONS".equals(request.getMethod()) ||
                 path.startsWith("/api/auth/login") ||
                 path.startsWith("/api/auth/register") ||
-                path.startsWith("/api/auth/refresh") ||
                 path.startsWith("/oauth2/") ||
                 path.startsWith("/login/oauth2/")) {
             filterChain.doFilter(request, response);
             return;
         }
-
 
         String authHeader = request.getHeader("Authorization");
         String token = null;
@@ -52,18 +50,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-        }
-
-        else if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if ("token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-
-        if (token != null) {
             username = jwtService.extrairUsername(token);
         }
 

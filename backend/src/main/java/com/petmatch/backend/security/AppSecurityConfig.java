@@ -1,10 +1,7 @@
 package com.petmatch.backend.security;
 
-import com.petmatch.backend.config.CookieProps;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,7 +17,6 @@ import org.springframework.security.web.context.NullSecurityContextRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@EnableConfigurationProperties(CookieProps.class)
 @Configuration
 @EnableMethodSecurity
 public class AppSecurityConfig {
@@ -42,11 +38,10 @@ public class AppSecurityConfig {
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                /* devolve 401 em vez de redirect */
                 .exceptionHandling(ex ->
                         ex.defaultAuthenticationEntryPointFor(
                                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
-                                request -> true      // qualquer request não autenticado
+                                request -> true
                         )
                 )
 
@@ -59,12 +54,14 @@ public class AppSecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/refresh").permitAll()
-                        .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
+                        .requestMatchers("/", "/auth/**", "/oauth2/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
-                .oauth2Login(oauth -> oauth.successHandler(successHandler))
-
+                .oauth2Login(oauth -> oauth
+                        .loginPage("/auth/login")
+                        .successHandler(successHandler)
+                )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
