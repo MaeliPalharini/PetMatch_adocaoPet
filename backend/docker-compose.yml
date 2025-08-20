@@ -6,7 +6,7 @@ services:
     container_name: postgres-petmatch
     restart: unless-stopped
     env_file:
-      - .env               # contém PG_USER, PG_PASSWORD, PG_DATABASE
+      - ../.env               # contém PG_USER, PG_PASSWORD, PG_DATABASE
     environment:
       POSTGRES_USER: ${PG_USER}
       POSTGRES_PASSWORD: ${PG_PASSWORD}
@@ -23,7 +23,7 @@ services:
     container_name: pgadmin4
     restart: unless-stopped
     env_file:
-      - .env               # PGADMIN_DEFAULT_EMAIL, PGADMIN_DEFAULT_PASSWORD
+      - ../.env               # PGADMIN_DEFAULT_EMAIL, PGADMIN_DEFAULT_PASSWORD
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -40,7 +40,7 @@ services:
     container_name: petmatch-backend
     restart: unless-stopped
     env_file:
-      - .env               # todas as variáveis de ambiente
+      - ../.env               # todas as variáveis de ambiente
     environment:
       SPRING_PROFILES_ACTIVE: docker
       PG_HOST: db

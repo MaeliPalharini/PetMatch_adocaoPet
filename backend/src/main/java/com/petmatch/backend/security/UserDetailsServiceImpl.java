@@ -23,14 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + email));
 
-        // Prefixo "ROLE_" é obrigatório pelo Spring Security
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().name());
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                List.of(authority)
-        );
+        return new CustomUserDetails(user);
     }
 }
+
 
