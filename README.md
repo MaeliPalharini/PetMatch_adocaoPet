@@ -1,7 +1,16 @@
 # 🐾 PetMach – Site de Adoção de Pets
+### 💜 *"O match mais fiel da sua vida começa aqui"*
 
-Bem-vindo(a) ao repositório do **PataMansa**, um projeto pessoal de duas amigas, dedicado a facilitar a adoção responsável de animais de estimação. A ideia é construir uma aplicação completa com backend em Java (Spring Boot + DynamoDB) e frontend moderno e responsivo.
 
+O **PetMatch** é um projeto pessoal que transforma a experiência de adoção de animais em algo simples,
+acessível e moderno. Inspirado em plataformas de "match" como o Tinder, a proposta é criar um ambiente
+onde pessoas e pets possam se conectar de forma afetiva e intuitiva, dando match com quem realmente
+combina com você, o seu amor de quatro patas.
+
+A aplicação será responsiva e pensada para todos os dispositivos, com um frontend leve e bonito em 
+React + Vite + Tailwind, e um backend robusto em Java com Spring Boot e PostgreSQL.
+Mais do que um sistema de cadastro, o PetMatch quer ser um elo de conexão entre humanos 
+e bichinhos em busca de um novo lar ❤️
 ---
 
 ## 🎯 Objetivo
@@ -25,8 +34,10 @@ Criar uma plataforma onde pessoas possam:
 - Maven
 
 ### Frontend (em desenvolvimento)
-- HTML, CSS, JavaScript
-- Framework a definir (provavelmente React ou similar)
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
 
 ---
 
@@ -42,28 +53,26 @@ Criar uma plataforma onde pessoas possam:
         │ │ └── config/
         ├── pom.xml
         └── .gitignore
-
+     frontend/ (desenvolvimento)
+        ├── src/
+        │ ├── components/
+        │ ├── pages/
+        │ ├── styles/
+        │ └── App.tsx
+        ├── package.json
+        └── vite.config.js
 
 ---
 
 ## 🚧 Status do Projeto
 
-- ✅ Backend configurado com Spring Boot + PostgreSQL
-- ✅ Entidade `Pet` modelada
-- ✅ CRUD em andamento
+- ✅ Backend completo
 - 🚧 Frontend em desenvolvimento
-- 📝 Autenticação e autorização em progresso
-
 ---
 
 ## 📌 Próximos passos
 
-- [ ] Finalizar CRUD completo
-- [ ] Criar autenticação com JWT
-- [ ] Subir frontend e conectar com backend
-- [ ] Criar painel de admin
 - [ ] Publicar a aplicação (talvez com render, vercel ou EC2)
-
 ---
 
 ## 📄 Licença
