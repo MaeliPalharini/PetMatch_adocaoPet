@@ -7,10 +7,6 @@ acessível e moderno. Inspirado em plataformas de "match" como o Tinder, a propo
 onde pessoas e pets possam se conectar de forma afetiva e intuitiva, dando match com quem realmente
 combina com você, o seu amor de quatro patas.
 
-A aplicação será responsiva e pensada para todos os dispositivos, com um frontend leve e bonito em 
-React + Vite + Tailwind, e um backend robusto em Java com Spring Boot e PostgreSQL.
-Mais do que um sistema de cadastro, o PetMatch quer ser um elo de conexão entre humanos 
-e bichinhos em busca de um novo lar ❤️
 ---
 ## 🎯 Objetivo
 
